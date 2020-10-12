@@ -9,8 +9,16 @@ public class Convert {
 	public Convert() {
 	};
 
-	public HashMap<String, String> getMap() {
-		HashMap<String, String> maps = new HashMap<>();
+	public HashMap<Object, String> getMap() {
+		HashMap<Object, String> maps = new HashMap<>();
+
+		maps.put("0", "");
+		maps.put("00", "");
+		maps.put("000", "");
+
+		maps.put("1", "");
+		maps.put("11", "");
+		maps.put("111", "");
 
 		maps.put("2", "A");
 		maps.put("22", "B");
@@ -46,29 +54,30 @@ public class Convert {
 		maps.put("999", "Y");
 		maps.put("9999", "Z");
 		maps.put(" ", " ");
+		
 		return maps;
 
 	}
 
 	public String conversao(String letras) {
-
-		String [] numLetras = letras.split(" ");
-		StringBuilder bd = new StringBuilder();
-		
-		
-		List<String> lista01 = new ArrayList<String>();
-
+	
 		if (letras == null || letras.length() == 0) {
+			return "Argumento vazio ou inválido!";
 			
+		} else {
+			
+			String[] numLetras = letras.split(" ");
+			StringBuilder bd = new StringBuilder();
+			
+			for (int x = 0; x < numLetras.length; x++) {
+				if (this.getMap().get(numLetras[x]) == null) {
+					bd.append("");
+				}else {
+					String po = this.getMap().get(numLetras[x]);
+					bd.append(po);	
+				}							
+			}
+			return bd.toString();
 		}
-		
-		for( int x=0 ; x < numLetras.length ;x++) {
-			
-			String po = this.getMap().get(numLetras[x]); 			
-			bd.append(po);			
-		}			
-
-		return bd.toString();
-	}
-
+	};
 }
